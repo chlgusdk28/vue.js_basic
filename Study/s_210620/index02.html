@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script src="../../library/vue.js"></script>
+
+</head>
+<body>
+
+    <div id = "app">
+        <h1 v-bind:title ="subject">
+            {{ subject }}
+        </h1>
+    </div>    
+
+    <script>
+        // 뷰 인스턴스 생성 단 Vue는 대소문자 확인해야함 
+            new Vue({
+                el:'#app',
+                data :{
+                    subject:"템플릿과 v-디렉티브 익히기"
+
+                },
+                //라이프사이클 관련 순차적으로 맞는 라이프사이클 사용하면됨 
+
+                beforeCreated: function(){
+                    console.log("beforeCreated");
+                },
+                //methods: function(){
+                    //console.log("method");
+                //}, // 메소드는 이벤트를 걸어서 사용하기 때문에 필요 없음
+                created: function(){
+                    console.log("Created");
+                },
+                beforeUpdate: function(){
+                    console.log("beforeUpdate");
+                },
+                update: function(){
+                    console.log("method");
+                },
+                mounted: function(){
+                    console.log("mounted");
+                },
+                beforeMounted: function(){
+                    console.log("beforeMounted");
+                }
+            });
+
+    </script>
+</body>
+</html>
