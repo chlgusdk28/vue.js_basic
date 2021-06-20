@@ -52,9 +52,10 @@
 <div id="app3">
     <ul>
         <li v-for='row in obj'>
-            <span>{{ row.번호 }}</span>
-            <span>{{ row.이름 }}</span>
-            <span>{{ row.점수 }}</span>
+        <li v-for='(row, index) in obj'>
+            <span v-bind:title='index'>{{ row.번호 }}</span>
+            <span v-bind:title='index'>{{ row.이름 }}</span>
+            <span v-bind:title='index'>{{ row.점수 }}</span>
         </li>
 
     </ul>
@@ -75,5 +76,29 @@
 
     });
 </script>
+
+
+<div id="app4">
+    <table>
+        <tr>
+            <th>번호</th>
+            <th>과일이름</th>
+        </tr>
+        <tr v-for="(item,idx) in arr">
+            <td>{{idx+1}}</td>
+            <td>{{item}}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+new Vue({
+    el: "#app4",
+    data: {
+        arr:["사과","배","자몽","딸기","포토","수박"]
+    }
+});
+</script>
+
 </body>
 </html>
