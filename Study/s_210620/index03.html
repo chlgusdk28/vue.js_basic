@@ -12,15 +12,29 @@
             버튼클릭
         </button>
         <button @click = "eventFunction2">카운트 버튼</button>
+        
+        <button @click = "eventFunction3">배열버튼</button>
         <h1>{{cnt}}</h1>
-    </div>  
 
+    <table>
+        <tr>
+            <th>No.</th>
+            <th>과목</th>
+        </tr>
+        <tr v-for='(item, idx) in arr'>
+            <td>{{idx}}</td>
+            <td>{{item}}</td>
+        </tr>
+    </table>
+</div>  
     <script>
             new Vue({
                 el:'#app',
                 data :{
                     title:"V-on 디렉티브와 메서드", 
-                    cnt : 0
+                    cnt : 0,
+                    msg : "Vue.js, React.js, Javascript, Node.js, Jquery",
+                    arr : []
                 },
                 methods:{
                     //2.5 버전에서는 이와 같이 실행 (2.6에서는 function 생략 가능)
@@ -35,11 +49,29 @@
                         }else{
                             this.cnt++;
                         }
+                        
+                    },
+                    eventFunction3: function(){
+                        this.arr = this.msg.split(",");
+                        console.log(this.arr);
                     }
                 }
             });
 
     </script> 
-
+ul>li.slide.slide$*10{SLIDE$}
+<!-- 젠코딩 방법 -->
+<ul>
+    <li class="slide slide1">SLIDE1</li>
+    <li class="slide slide2">SLIDE2</li>
+    <li class="slide slide3">SLIDE3</li>
+    <li class="slide slide4">SLIDE4</li>
+    <li class="slide slide5">SLIDE5</li>
+    <li class="slide slide6">SLIDE6</li>
+    <li class="slide slide7">SLIDE7</li>
+    <li class="slide slide8">SLIDE8</li>
+    <li class="slide slide9">SLIDE9</li>
+    <li class="slide slide10">SLIDE10</li>
+</ul>
 </body>
 </html>
