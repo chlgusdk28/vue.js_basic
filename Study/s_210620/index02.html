@@ -11,7 +11,7 @@
         <h1 :class="className" v-bind:title ="subject">
             {{ subject }}
         </h1>
-        <img scr="imgUrl" :alt="altText" : title="altText">
+        <img :src="imgUrl" :alt="altText" :title="altText" width="100px">
     </div>    
 
     <script>
@@ -32,15 +32,9 @@
     <div id = "app2">
         <h1>{{ title }}</h1>
         <h2 v-if="x">나는 과일을 좋아합니다.</h2>
-        <p>100점</p>
-        <p>80점</p>
-        <p>91점</p>
-        <p>10점</p>
-        <p>30점</p>
-        <p>22점</p>
-        <p>99점</p>
-        <p>54점</p>
-        <p>76점</p>
+        <p v-if="score=100">A</p>
+        <p v-else-if="score>90">B</p>
+        <p v-else>F</p>
     
     </div>
 
@@ -49,10 +43,37 @@
             el:"#app2",
             data:{
                 title:"v-if 디렉티브 조건문",
-                x = false,
-                score = 100
+                x: false,
+                score: 100
             }
         });
     </script>
+<p>---------------------------------------------------------------------</p>
+<div id="app3">
+    <ul>
+        <li v-for='row in obj'>
+            <span>{{ row.번호 }}</span>
+            <span>{{ row.이름 }}</span>
+            <span>{{ row.점수 }}</span>
+        </li>
+
+    </ul>
+</div>
+<script>
+    new Vue({
+        el:"#app3",
+        data:{
+            obj:[
+                {번호:1, 이름:"김유신1", 점수:100},
+                {번호:2, 이름:"김유신2", 점수:80},
+                {번호:3, 이름:"김유신3", 점수:60},
+                {번호:4, 이름:"김유신4", 점수:80},
+                {번호:5, 이름:"김유신5", 점수:70}
+            ],
+            title:"객체 배열처리"
+        }
+
+    });
+</script>
 </body>
 </html>

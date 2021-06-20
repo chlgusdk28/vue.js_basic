@@ -55,5 +55,56 @@
             });
 
     </script>
+
+
+<div id = "app">
+    <h1 :class="className" v-bind:title ="subject">
+        {{ subject }}
+    </h1>
+    <img :src="imgUrl" :alt="altText" :title="altText">
+</div>    
+
+<script>
+    // 뷰 인스턴스 생성 단 Vue는 대소문자 확인해야함 
+        new Vue({
+            el:'#app',
+            data :{
+                subject:"템플릿과 v-디렉티브 익히기",
+                imgUrl:"https://cdn.pixabay.com/photo/2021/06/15/13/20/banded-demoiselle-6338620_1280.jpg",
+                altText:"이미지입니다.",
+                className:'main-title' //클래스 이름을 가변적으로 설정 가능
+
+            }
+        });
+
+</script>
+
+<div id = "app2">
+    <h1>{{ title2 }}</h1>
+    <h2 v-if="x">나는 과일을 좋아합니다.</h2>
+    <p>100점</p>
+    <p>80점</p>
+    <p>91점</p>
+    <p>10점</p>
+    <p>30점</p>
+    <p>22점</p>
+    <p>99점</p>
+    <p>54점</p>
+    <p>76점</p>
+
+</div>
+
+<script>
+    new Vue({
+        el:"#app2",
+        data:{
+            title2:"v-if 디렉티브 조건문",
+            x = false,
+            score = 100
+        }
+    });
+</script>
+
+
 </body>
 </html>
