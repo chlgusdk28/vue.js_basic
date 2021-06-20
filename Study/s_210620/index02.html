@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="../../library/vue.js"></script>
 
 </head>
 <body>
@@ -32,7 +32,16 @@
     <div id = "app2">
         <h1>{{ title }}</h1>
         <h2 v-if="x">나는 과일을 좋아합니다.</h2>
-
+        <p>100점</p>
+        <p>80점</p>
+        <p>91점</p>
+        <p>10점</p>
+        <p>30점</p>
+        <p>22점</p>
+        <p>99점</p>
+        <p>54점</p>
+        <p>76점</p>
+    
     </div>
 
     <script>
@@ -40,7 +49,8 @@
             el:"#app2",
             data:{
                 title:"v-if 디렉티브 조건문",
-                x = true
+                x = false,
+                score = 100
             }
         });
     </script>
