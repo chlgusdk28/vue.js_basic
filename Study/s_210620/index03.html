@@ -1,0 +1,45 @@
+<html>
+    <title>뷰 템블릿과 V-on 디렉티브 & 메서드 </title>
+    <head>
+        <script src="../../library/vue.js"></script>
+    </head>
+<body>
+
+    <div id = "app">
+        <h1 onclick="함수"> {{title}} </h1>
+        <button v-on:click="eventFunction">
+            <!--v-on:click = @click (동일)-->
+            버튼클릭
+        </button>
+        <button @click = "eventFunction2">카운트 버튼</button>
+        <h1>{{cnt}}</h1>
+    </div>  
+
+    <script>
+            new Vue({
+                el:'#app',
+                data :{
+                    title:"V-on 디렉티브와 메서드", 
+                    cnt : 0
+                },
+                methods:{
+                    //2.5 버전에서는 이와 같이 실행 (2.6에서는 function 생략 가능)
+                    eventFunction: function(){
+                        alert("클릭이벤트 실행");
+                        this.title="이름바꾸기";
+                    },
+                    eventFunction2: function(){
+                        this.title="카운트 이벤트";
+                        if (this.cnt == 3){ // 반드시 this를 써야 현재값을 인식한다.
+                            this.cnt--;
+                        }else{
+                            this.cnt++;
+                        }
+                    }
+                }
+            });
+
+    </script> 
+
+</body>
+</html>
