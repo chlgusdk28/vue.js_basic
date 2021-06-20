@@ -2,15 +2,16 @@
 <html>
 <head>
 
-<script src="../../library/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 </head>
 <body>
 
     <div id = "app">
-        <h1 v-bind:title ="subject">
+        <h1 :class="className" v-bind:title ="subject">
             {{ subject }}
         </h1>
+        <img scr="imgUrl" :alt="altText" : title="altText">
     </div>    
 
     <script>
@@ -18,34 +19,30 @@
             new Vue({
                 el:'#app',
                 data :{
-                    subject:"템플릿과 v-디렉티브 익히기"
+                    subject:"템플릿과 v-디렉티브 익히기",
+                    imgUrl:"https://cdn.pixabay.com/photo/2021/06/15/13/20/banded-demoiselle-6338620_1280.jpg",
+                    altText:"이미지입니다.",
+                    className:'main-title' //클래스 이름을 가변적으로 설정 가능
 
-                },
-                //라이프사이클 관련 순차적으로 맞는 라이프사이클 사용하면됨 
-
-                beforeCreated: function(){
-                    console.log("beforeCreated");
-                },
-                //methods: function(){
-                    //console.log("method");
-                //}, // 메소드는 이벤트를 걸어서 사용하기 때문에 필요 없음
-                created: function(){
-                    console.log("Created");
-                },
-                beforeUpdate: function(){
-                    console.log("beforeUpdate");
-                },
-                update: function(){
-                    console.log("method");
-                },
-                mounted: function(){
-                    console.log("mounted");
-                },
-                beforeMounted: function(){
-                    console.log("beforeMounted");
                 }
             });
 
+    </script>
+
+    <div id = "app2">
+        <h1>{{ title }}</h1>
+        <h2 v-if="x">나는 과일을 좋아합니다.</h2>
+
+    </div>
+
+    <script>
+        new Vue({
+            el:"#app2",
+            data:{
+                title:"v-if 디렉티브 조건문",
+                x = true
+            }
+        });
     </script>
 </body>
 </html>
