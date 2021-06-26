@@ -14,13 +14,6 @@
     <div id="header">
         <!-- 뷰 컴포넌트 가상 요소(태그) -->
         <header-component></header-component>
-
-        <main id="main">
-            <section1-component></section1-component>
-            <!-- <section2-component></section2-component>
-            <section3-component></section3-component>
-            <section4-component></section4-component> -->
-        </main>
     </div>
 
     <script>
@@ -51,22 +44,6 @@
             "
         });
 
-// 섹션 1 
-Vue.component('section1-component',{
-    template:"\
-        <section>\
-            <div class='wrap'>\
-                <div class='gap'>\
-                    <div class='container'>\
-                        <div class='title'>\
-                            <h2>PEOPLE</h2>\
-                        </div>\
-                     </div>\
-                </div>\
-            </div>\
-        </section>\
-    "
-});
 
         new Vue({
             el:'#header',
