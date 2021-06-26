@@ -32,7 +32,7 @@
         // 주의 사항 : 반드시 탬플릿트요소들을 묶어주는 랩핑을 하고 탬플릿트 자식요소를 코딩한다.
         // Vue.component('가상컴포넌트이름',{});
 
-        Vue.component('header-component',{
+        var headerComponent = {
             template:"\
                         <header id='header'>\
                             <div class='wrap'>\
@@ -54,10 +54,12 @@
                             </div>\
                         </header>\
                     "
-        });
+        }
 
         // 섹션1
-        Vue.component('section1-component', {
+        //Vue.component('section1-component', 는 생략가능
+
+        var section1Component = Vue.component('section1-component', {
             template:"\
                         <section id='section1' class='section1234'>\
                             <div class='wrap'>\
@@ -71,10 +73,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        })
 
         // 섹션2
-        Vue.component('section2-component', {
+        var section2Component = {
             template:"\
                         <section id='section2' class='section1234'>\
                             <div class='wrap'>\
@@ -88,10 +90,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        }
 
         // 섹션3
-        Vue.component('section3-component', {
+        var section3Component = {
             template:"\
                         <section id='section3' class='section1234'>\
                             <div class='wrap'>\
@@ -105,10 +107,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        }
 
         // 섹션4
-        Vue.component('section4-component', {
+        var section4Component = {
             template:"\
                         <section id='section4' class='section1234'>\
                             <div class='wrap'>\
@@ -122,22 +124,24 @@
                             </div>\
                         </section>\
                     "
-        });
-
-
-
-
-
-
-
+        }
 
 
         new Vue({
             el:'#brando',
             data:{
                 title:'Header Title'
+            },
+            components:{
+                // 컴포넌트 등록
+                'header-component' :headerComponent, // 가상요소 컴포넌트 이름(JSX) : 템플릿 변수 
+                'section1-component' : section1Component,
+                'section2-component' : section2Component,
+                'section3-component' : section3Component,
+                'section4-component' : section4Component
             }
         });
+
     </script>
 
     <!-- 뷰 컴포넌트 자식 요소인 탬플릿트의 스타일 -->
@@ -264,7 +268,7 @@ var sec4Comp = {
             'section2-component' : sec2Comp,
             'section3-component' : sec3Comp,
             'section4-component' : sec4Comp
-        
+
         }
     });
 </script>
