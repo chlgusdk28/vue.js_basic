@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 컴포넌트(Component) 전역컴포넌트</title>
+    <script src="./vue/vue.js"></script>
+
+</head>
+
+<body>
+
+<div id="wrap">
+    
+    <div id="brando">
+        <!-- 뷰 컴포넌트 가상 요소(태그) -->
+        <header-component></header-component>
+        <main id="main">
+            <section1-component></section1-component>
+            <section2-component></section2-component>
+            <section3-component></section3-component>
+            <section4-component></section4-component>        
+        </main>
+    </div>
+
+    <script>
+        
+        // 뷰 전역 컴포넌트 등록 - 자식요소 탬플릿트를 안에 넣어준다.
+        // 주의 사항 : 반드시 탬플릿트요소들을 묶어주는 랩핑을 하고 탬플릿트 자식요소를 코딩한다.
+        // Vue.component('가상컴포넌트이름',{});
+
+        Vue.component('header-component',{
+            template:"\
+                        <header id='header'>\
+                            <div class='wrap'>\
+                                <div class='gap'>\
+                                    <div class='container clearfix'>\
+                                        <h1><a href='#'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
+                                        <nav>\
+                                            <ul>\
+                                                <li><a href='#'>ABOUT</a></li>\
+                                                <li><a href='#'>SERVICES</a></li>\
+                                                <li><a href='#'>PORTFOLIO</a></li>\
+                                                <li><a href='#'>AWARDS</a></li>\
+                                                <li><a href='#'>BLOG</a></li>\
+                                                <li><a href='#'>CONTACT</a></li>\
+                                            </ul>\
+                                        </nav>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </header>\
+                    "
+        });
+
+        // 섹션1
+        Vue.component('section1-component', {
+            template:"\
+                        <section id='section1' class='section1234'>\
+                            <div class='wrap'>\
+                                <div class='gap'>\
+                                    <div class='container'>\
+                                        <div class='title'>\
+                                            <h2>PEOPLE</h2>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </section>\
+                    "
+        });
+
+        // 섹션2
+        Vue.component('section2-component', {
+            template:"\
+                        <section id='section2' class='section1234'>\
+                            <div class='wrap'>\
+                                <div class='gap'>\
+                                    <div class='container'>\
+                                        <div class='title'>\
+                                            <h2>NATURE</h2>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </section>\
+                    "
+        });
+
+        // 섹션3
+        Vue.component('section3-component', {
+            template:"\
+                        <section id='section3' class='section1234'>\
+                            <div class='wrap'>\
+                                <div class='gap'>\
+                                    <div class='container'>\
+                                        <div class='title'>\
+                                            <h2>WILDLIFE</h2>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </section>\
+                    "
+        });
+
+        // 섹션4
+        Vue.component('section4-component', {
+            template:"\
+                        <section id='section4' class='section1234'>\
+                            <div class='wrap'>\
+                                <div class='gap'>\
+                                    <div class='container'>\
+                                        <div class='title'>\
+                                            <h2>OBJECTS</h2>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </section>\
+                    "
+        });
+
+
+
+
+
+
+
+
+
+        new Vue({
+            el:'#brando',
+            data:{
+                title:'Header Title'
+            }
+        });
+    </script>
+
+    <!-- 뷰 컴포넌트 자식 요소인 탬플릿트의 스타일 -->
+
+    <style scoped>
+        * {margin:0;padding:0;vertical-align:middle;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial';color:#444;background:#fff;}
+        ul, li {list-style:none;}
+        a {color:#444;text-decoration:none;}
+        header, main, section, footer, nav, aside {display:block;}
+        .clearfix::after {content:'';display:block;clear:both;}
+
+        #wrap {width:100%;}
+        #wrap #brando {width:100%;}
+        #wrap #brando #header {width:100%;border-bottom:1px solid rgba(255,255,255, .2);position:fixed;top:0;left:0;z-index:3;}
+        #wrap #brando #header .wrap {width:1170px;margin:0 auto;}
+        #wrap #brando #header .wrap .gap {margin:0 15px;}
+        #wrap #brando #header .wrap .gap .container {width:100%;height:75px;}
+        #wrap #brando #header .wrap .gap .container h1 {width:156px;float:left;height:30px;padding:22.5px 0;}
+        #wrap #brando #header .wrap .gap .container h1 a {display:block;}
+        #wrap #brando #header .wrap .gap .container h1 a img {width:100%;}
+
+        #wrap #brando #header .wrap .gap .container nav {float:right;padding:31.5px 0;}
+        #wrap #brando #header .wrap .gap .container nav ul {display:inline-block;}
+        #wrap #brando #header .wrap .gap .container nav ul li {display:inline-block;margin-left:50px;}
+        #wrap #brando #header .wrap .gap .container nav ul li a {color:#fff;font-size:12px;font-weight:600;transition:color .3s;}
+        #wrap #brando #header .wrap .gap .container nav ul li a:hover {color:#ccc;}
+
+
+        #wrap #brando #main   {width:100%;position:relative;z-index:2;}
+        #wrap #brando #main   .section1234 {width:100%;}
+        #wrap #brando #main   .section1234 .wrap {width:100%;max-width:1170px;margin:0 auto;}
+        #wrap #brando #main   .section1234 .wrap .gap {margin:0 15px;}
+        #wrap #brando #main   .section1234 .wrap .gap .container {width:100%;height:1080px;line-height:1080px;} 
+        #wrap #brando #main   .section1234 .wrap .gap .container .title {text-align:center;}
+        #wrap #brando #main   .section1234 .wrap .gap .container .title h2 {font-size:200px;color:#fff;}
+        
+        #wrap #brando #main   #section1 {background:url(./img/photography-img1.jpg) no-repeat 50% 50% fixed;background-size:cover;}
+        #wrap #brando #main   #section2 {background:url(./img/photography-img2.jpg) no-repeat 50% 50% fixed;background-size:cover;}
+        #wrap #brando #main   #section3 {background:url(./img/photography-img3.jpg) no-repeat 50% 50% fixed;background-size:cover;}
+        #wrap #brando #main   #section4 {background:url(./img/photography-img4.jpg) no-repeat 50% 50% fixed;background-size:cover;}
+
+        #wrap #brando #main   #section1 .wrap .gap .container .title h2  {color:rgba(0, 255, 151, .5);}
+        #wrap #brando #main   #section2 .wrap .gap .container .title h2  {color:rgba(0, 255, 151, .5);}
+        #wrap #brando #main   #section3 .wrap .gap .container .title h2  {color:rgba(0, 239, 255, .5);}
+        #wrap #brando #main   #section4 .wrap .gap .container .title h2  {color:rgba(0, 255, 151, .5);}
+
+    </style>
+
+
+
+<hr>
+
+<div id="app">
+
+    <h1>지역 컴포넌트 등록</h1>
+
+    <header-compnent></header-compnent>
+
+    <div id="main">
+
+        <section1-component></section1-component>
+        <section2-component></section2-component>
+        <section3-component></section3-component>
+        <section4-component></section4-component>  
+
+    </div>
+</div>    
+
+
+
+<script>
+
+// 지역 컴포넌트 등록 /변수로 루트에 컴포넌츠에 등록  
+// 템플릿은 밖의 부모요소 (묶는것) 이 하나만 있어야함  (반드시)
+var headerComp = {
+    template:"\
+                <header id = 'header'>\
+                    <h1>섹션1컴포넌트</h1>\
+                </header>\
+            "
+}
+
+var sec1Comp = {
+    template:"\
+                <div>\
+                    <h1>섹션1컴포넌트</h1>\
+                </div>\
+            "
+}
+
+var sec2Comp = {
+    template:"\
+                <div>\
+                    <h1>섹션2컴포넌트</h1>\
+                </div>\
+            "
+}
+
+var sec3Comp = {
+    template:"\
+                <div>\
+                    <h1>섹션3컴포넌트</h1>\
+                </div>\
+            "
+}
+
+var sec4Comp = {
+    template:"\
+                <div>\
+                    <h1>섹션4컴포넌트</h1>\
+                </div>\
+            "
+}
+    new Vue({
+        el : '#app',
+        data :{
+        },
+        components:{
+            // 컴포넌트 등록
+            'header-compnent' :headerComp, // 가상요소 컴포넌트 이름(JSX) : 템플릿 변수 
+            'section1-component' : sec1Comp,
+            'section2-component' : sec2Comp,
+            'section3-component' : sec3Comp,
+            'section4-component' : sec4Comp
+        
+        }
+    });
+</script>
+
+<style scoped>
+
+
+</style>
+
+
+
+
+</div>
+</body>
+</html>
