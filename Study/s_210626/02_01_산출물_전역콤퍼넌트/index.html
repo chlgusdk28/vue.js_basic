@@ -17,9 +17,9 @@
 
         <main id="main">
             <section1-component></section1-component>
-            <!-- <section2-component></section2-component>
+            <section2-component></section2-component>
             <section3-component></section3-component>
-            <section4-component></section4-component> -->
+            <section4-component></section4-component>
         </main>
     </div>
 
@@ -51,22 +51,73 @@
             "
         });
 
-// 섹션 1 
-Vue.component('section1-component',{
-    template:"\
-        <section>\
-            <div class='wrap'>\
-                <div class='gap'>\
-                    <div class='container'>\
-                        <div class='title'>\
-                            <h2>PEOPLE</h2>\
+    // 섹션 1 
+    Vue.component('section1-component',{
+        template:"\
+            <section id='section1'>\
+                <div class='wrap'>\
+                    <div class='gap'>\
+                        <div class='container'>\
+                            <div class='title'>\
+                                <h2>PEOPLE</h2>\
+                            </div>\
                         </div>\
-                     </div>\
+                    </div>\
                 </div>\
-            </div>\
-        </section>\
-    "
-});
+            </section>\
+        "
+    });
+
+        // 섹션 2
+        Vue.component('section2-component',{
+        template:"\
+        <section id='section2'>\
+                <div class='wrap'>\
+                    <div class='gap'>\
+                        <div class='container'>\
+                            <div class='title'>\
+                                <h2>WILDLIFE</h2>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </section>\
+        "
+    });
+
+        // 섹션 3 
+        Vue.component('section3-component',{
+        template:"\
+            <section id='section3'>\
+                <div class='wrap'>\
+                    <div class='gap'>\
+                        <div class='container'>\
+                            <div class='title'>\
+                                <h2>OBJECTS</h2>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </section>\
+        "
+    });
+
+        // 섹션 4
+        Vue.component('section4-component',{
+        template:"\
+            <section id='section4'>\
+                <div class='wrap'>\
+                    <div class='gap'>\
+                        <div class='container'>\
+                            <div class='title'>\
+                                <h2>OBJECTS2222</h2>\
+                            </div>\
+                        </div>\
+                    </div>\
+                </div>\
+            </section>\
+        "
+    });
 
         new Vue({
             el:'#header',
