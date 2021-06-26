@@ -9,46 +9,55 @@
 
 </head>
 <body>
-
-
-    <div id="wrap">
-        <div id = "header">
-            <h1> {{ title }}</h1>
-            <!-- 가상요소가 들어갈 자리 -->
-            <hedaer-component01>
-
-            </hedaer-component01>
-        </div>
+<div id="wrap">
+    
+    <div id="header">
+        <!-- 뷰 컴포넌트 가상 요소(태그) -->
+        <header-component></header-component>
     </div>
 
-
     <script>
-
-        // 뷰 전역 컴포넌트 등록 - 자식요소 템플릿을 안에 넣어준다.
-        // 주의사항 : 반드시  템플릿 요소들을 묶어주는 랩핑을 하고 템플릿 자식요소를 코딩한다.
-        // Vue.component('가상 컴포넌트 이름 즉, 여기서는 hedaer-component01이 와야한다',{})
-        Vue.component('hedaer-component01',{
-           template:"<div class='wrap'><h1><a href='#''><img src='./img/logo.jpg'></a></h1></div>"             
+        // 뷰 전역 컴포넌트 등록 - 자식요소 탬플릿트를 안에 넣어준다.
+        // 주의 사항 : 반드시 탬플릿트요소들을 묶어주는 랩핑을 하고 탬플릿트 자식요소를 코딩한다.
+        // Vue.component('가상컴포넌트이름',{});
+        Vue.component('header-component',{
+            template:"\
+                    <header id='header'>\
+                        <div class='wrap'>\
+                            <div class='gap'>\
+                                <div class='container'>\
+                                    <h1><a href='#'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
+                                    <nav>\
+                                        <ul>\
+                                            <li><a href='#'>ABOUT</a></li>\
+                                            <li><a href='#'>SERVICES</a></li>\
+                                            <li><a href='#'>PORTFOLIO</a></li>\
+                                            <li><a href='#'>AWARDS</a></li>\
+                                            <li><a href='#'>BLOG</a></li>\
+                                            <li><a href='#'>CONTACT</a></li>\
+                                        </ul>\
+                                    </nav>\
+                                </div>\
+                            </div>\
+                        </div>\
+                    </header>\
+            "
         });
+
 
         new Vue({
             el:'#header',
             data:{
-                title:'Header Title'
+                title:'Header Title'  
             }
         });
-
     </script>
 
-<!--뷰 컴포넌트의 자식요소인 템플릿의 스타일 지정 -->
-
+    <!-- 뷰 컴포넌트 자식 요소인 탬플릿트의 스타일 -->
     <style>
 
-
-
-        
     </style>
 
-
+</div>
 </body>
 </html>
