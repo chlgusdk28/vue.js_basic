@@ -4,53 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>뷰 시작하기</title>
+    <title>뷰 컴포넌트(Component) 전역컴포넌트</title>
     <script src="./vue/vue.js"></script>
 
 </head>
 <body>
 
-    <div id="wrap">
-        <h1>머스테쉬(수염괄호)를 이용 데이터 바인딩 {{ msg }} </h1>
-        <h2> {{ title }} </h2>
-        <hr>
-        <!-- <a v-bind:href="url" v-bind:title='atit'>네이버</a> -->
-        <a :href="url" :title='atit'>네이버</a>
-    </div>
+    <header>
+        <div class="wrap">
+            <div class="gap">
+                <div class="container">
+                    <div class="logo"></div>
+                        <div class="nav">
+                            <ul>
+                                <li><a href="#">ABOUT</a></li>
+                                <li><a href="#">SERVICE</a></li>
+                                <li><a href="#">PORTFOLIO</a></li>
+                                <li><a href="#">AWARDS</a></li>
+                                <li><a href="#">BLOG</a></li>
+                                <li><a href="#">CONTACT</a></li>
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-    <script>
-        // 뷰 인스턴스 생성
-        new Vue({
-            el:'#wrap', //선택자 루트
-            data:{
-                msg:'뷰 루트에 인스턴스 생성!',
-                title:'뷰 변수 등록 값을 넣고 사용 속성변수 멤버변수',
-                arr:['수박','참외', '딸기', '자몽'],
-                a: true,
-                atit:'네이버',
-                url:'http://www.naver.com'
-            },
-            beforCreate: function(){
-                console.log('beforCreate');
-            },
-            created: function(){
-                console.log('created');
-            },
-            beforMount: function(){
-                console.log('beforMounte');
-            },
-            mounted: function(){
-                console.log('mounted');
-                //제이쿼리 사용 적합한 위치
-            },
-            beforUpadate: function(){
-                console.log('beforUpadate');
-            },
-            updated: function(){
-                console.log('updated');
-            }
-        });
-    </script>
-    
+  
 </body>
 </html>
