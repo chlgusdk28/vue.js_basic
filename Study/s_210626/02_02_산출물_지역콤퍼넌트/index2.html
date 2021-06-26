@@ -17,7 +17,9 @@
     
     <div id="brando">
         <!-- 뷰 컴포넌트 가상 요소(태그) -->
-        <header-component></header-component>
+
+        <!-- props1에 title 파라미터 전달  -->
+        <header-component :props1='title'></header-component>
         <main id="main">
             <section1-component></section1-component>
             <section2-component></section2-component>
@@ -33,12 +35,13 @@
         // Vue.component('가상컴포넌트이름',{});
 
         var headerComponent = {
+            props:[props1, props2, props3],       
             template:"\
                         <header id='header'>\
                             <div class='wrap'>\
                                 <div class='gap'>\
                                     <div class='container clearfix'>\
-                                        <h1><a href='#'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
+                                        <h1><a href='#' v-bind:title='props1'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
                                         <nav>\
                                             <ul>\
                                                 <li><a href='#'>ABOUT</a></li>\
@@ -60,6 +63,7 @@
         //Vue.component('section1-component', 는 생략가능
 
         var section1Component = Vue.component('section1-component', {
+            props:[props1, props2],
             template:"\
                         <section id='section1' class='section1234'>\
                             <div class='wrap'>\
@@ -77,6 +81,7 @@
 
         // 섹션2
         var section2Component = {
+            props:[props1, props2],
             template:"\
                         <section id='section2' class='section1234'>\
                             <div class='wrap'>\
@@ -94,6 +99,7 @@
 
         // 섹션3
         var section3Component = {
+            props:[props1, props2],
             template:"\
                         <section id='section3' class='section1234'>\
                             <div class='wrap'>\
@@ -111,6 +117,7 @@
 
         // 섹션4
         var section4Component = {
+            props:[props1, props2],
             template:"\
                         <section id='section4' class='section1234'>\
                             <div class='wrap'>\
@@ -130,11 +137,11 @@
         new Vue({
             el:'#brando',
             data:{
-                title:'Header Title'
+                title:'Header Title : BRANDO LOGO'
             },
             components:{
                 // 컴포넌트 등록
-                'header-component' :headerComponent, // 가상요소 컴포넌트 이름(JSX) : 템플릿 변수 
+                'header-component' : headerComponent, // 가상요소 컴포넌트 이름(JSX) : 템플릿 변수 
                 'section1-component' : section1Component,
                 'section2-component' : section2Component,
                 'section3-component' : section3Component,
