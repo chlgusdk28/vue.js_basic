@@ -15,8 +15,8 @@
         <!-- 뷰 컴포넌트 가상 요소(태그) -->
         <header-component></header-component>
         <main id="main">
-            <section1-component></section1-component>
-            <section2-component></section2-component>
+            <section1-component :propstitle='title'  v-on:clickevt='rootMethodFn'></section1-component>
+            <section2-component :propstitle='title2' @click2='rootsec2'></section2-component>
             <section3-component></section3-component>
             <section4-component></section4-component>        
         </main>
@@ -35,56 +35,93 @@
                             <div class='wrap'>\
                                 <div class='gap'>\
                                     <div class='container clearfix'>\
-                                        <h1><a href='#'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
+                                        <h1><a :href='hrefUrl' @click.prevent='logoEvent'><img :src='imgUrl' :alt='altText'></a></h1>\
+                                        <h1><a :href='hrefUrl' @click.stop='logoEvent'><img :src='imgUrl' :alt='altText'></a></h1>\
                                         <nav>\
                                             <ul>\
-                                                <li><a href='#'>ABOUT</a></li>\
-                                                <li><a href='#'>SERVICES</a></li>\
-                                                <li><a href='#'>PORTFOLIO</a></li>\
-                                                <li><a href='#'>AWARDS</a></li>\
-                                                <li><a href='#'>BLOG</a></li>\
-                                                <li><a href='#'>CONTACT</a></li>\
+                                                <li v-for='item in menuArr'><a href='#'>{{item}}</a></li>\
                                             </ul>\
                                         </nav>\
                                     </div>\
                                 </div>\
                             </div>\
                         </header>\
-                    "
+                    ",
+            data: function(){ //컴포넌트에 내에서는 메서드로 사용(멤버 함수) ECMA Script5  data: function(){} => ECMA Script6 data(){}
+                return{  //그리고 리턴 사용
+                   menuArr:['ABOUT','SERVICES','PORTFOLIO','AWARDS','BLOG','CONTACT'],
+                   imgUrl:'./img/logo-photography.png',
+                   hrefUrl:'http://www.naver.com',
+                   altText:'Brando Logo Text'
+                }
+            },
+            methods:{
+                logoEvent: function(){
+                    this.hrefUrl = 'javascript:void(0);';
+                    setTimeout(function(){
+                        location.href = 'http://www.nike.co.kr'
+                        // this.hrefUrl = 'http://www.istarbucks.co.kr/'
+                    },200);                    
+                }
+            }                    
         });
 
         // 섹션1
         Vue.component('section1-component', {
+            props:['propstitle'],
             template:"\
                         <section id='section1' class='section1234'>\
                             <div class='wrap'>\
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>PEOPLE</h2>\
+                                            <h2 @click='eventMethodCall' :title='toolTip'>{{ propstitle }}</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+            data: function(){
+                return{
+                    toolTip:'SECTION1 PEOPLE'
+                }
+            },
+            methods:{
+                eventMethodCall: function(){  //click
+                   //탬플릿트(하위컴포넌트) 타이틀 클릭(clcik) 이벤트 발생을 속성 생성 $emit() api
+                    this.$emit('clickevt', 'SECTION1'); //아큐먼트(전달인자) 추가 전송
+                }
+            }   
         });
 
         // 섹션2
         Vue.component('section2-component', {
+            props:['propstitle'],
             template:"\
                         <section id='section2' class='section1234'>\
                             <div class='wrap'>\
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>NATURE</h2>\
+                                            <h2 :title='toolTip'  @click='clickfn'>{{ propstitle }}</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+            data: function(){
+                return{
+                    toolTip:'SECTION2 Neture',
+                    title:'NETURE'
+                }
+            },
+            methods:{
+                clickfn: function(){
+                    this.$emit('click2', 'SECTION2'); //아큐먼트(전달인자) 추가 전송
+                }
+            }
         });
 
         // 섹션3
@@ -95,13 +132,19 @@
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>WILDLIFE</h2>\
+                                            <h2 :title='toolTip'>{{ title }}</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+            data: function(){
+                return{
+                    toolTip:'SECTION3 WILDLIFE',
+                    title:'WILDLIFE'
+                }
+            }
         });
 
         // 섹션4
@@ -112,13 +155,19 @@
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>OBJECTS</h2>\
+                                            <h2 :title='toolTip'>{{ title }}</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+            data: function(){
+                return{
+                    toolTip:'SECTION4 OBJECTS',
+                    title:'OBJECTS'
+                }
+            }
         });
 
 
@@ -127,9 +176,22 @@
 
         new Vue({
             el:'#brando',
-            data:{
-                title:'Header Title',
-                menuArr :[ABOUT, SERVICES, PORTFOLIO, AWARDS, BLOG, CONTACT]
+            data:{ //섹션1의 타이틀을 루트 title 속성으로 props 지정하고 
+                   //버튼을 클릭시 루트 title 속성 수정하는 이벤트 실행 $emit()
+                title:'Root Title!!!',
+                title2:'Root Title!!!',
+                title3:'Root Title!!!',
+                title4:'Root Title!!!'
+                
+            },
+            methods: {
+                rootMethodFn: function(p){ //섹션1 타이틀을 클릭 하여 발생 전달된 함수
+                    this.title = p + '!'
+                },
+                rootsec2: function(z){
+                    this.title2 = z + '!'
+                }
+
             }
         });
 
@@ -183,81 +245,6 @@
 
     </style>
 
-
-    <hr>
-
-    <div id="app">
-        <h1> 지역 컴포넌트 등록 </h1>
-
-        <header-component></header-component>
-        <div id="main">
-            <section1-component></section1-component>
-            <section2-component></section2-component>
-            <section3-component></section3-component>
-            <section4-component></section4-component>
-        </div>
-        
-    </div>
-
-    <script>
-
-        // 지역 컴포넌트 등록 : 탬플릿트를 변수를 이용 루트의 컴포넌츠에 등록
-        var headerComp = {
-            template:"\
-                    <header id='header'>\
-                        <h1>헤더 컴포넌트</h1>\
-                    </header>\
-                "
-        }
-        var sec1Comp = {
-            template:"\
-                    <section id='section1'>\
-                        <h1>섹션1 컴포넌트</h1>\
-                    </section>\
-                "
-        }
-        var sec2Comp = {
-            template:"\
-                    <section id='section2'>\
-                        <h1>섹션2 컴포넌트</h1>\
-                    </section>\
-                "
-        }
-        var sec3Comp = {
-            template:"\
-                    <section id='section3'>\
-                        <h1>섹션3 컴포넌트</h1>\
-                    </section>\
-                "
-        }
-        var sec4Comp = {
-            template:"\
-                    <section id='section4'>\
-                        <h1>섹션1 컴포넌트</h1>\
-                    </section>\
-                "
-        }
-
-        new Vue({
-            el:'#app',
-            data:{
-                title: '지역컴포넌트'
-            },
-            components:{
-                // '가상요소컴포넌트이름(JSX)': 탬플릿트변수
-                'header-component'  : headerComp,
-                'section1-component': sec1Comp,
-                'section2-component': sec2Comp,
-                'section3-component': sec3Comp,
-                'section4-component': sec4Comp
-            }
-        });
-    </script>
-
-    <style scoped>
-
-
-    </style>
 
 
 </div>

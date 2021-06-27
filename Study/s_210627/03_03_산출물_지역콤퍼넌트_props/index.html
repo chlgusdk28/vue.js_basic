@@ -37,23 +37,38 @@
                             <div class='wrap'>\
                                 <div class='gap'>\
                                     <div class='container clearfix'>\
-                                        <h1><a href='#'><img src='./img/logo-photography.png' alt='logo'></a></h1>\
+                                        <h1><a :href='aHref' @click = ' eventFn '><img :src= 'imgSrc' :alt='logo'></a></h1>\
                                         <nav>\
                                             <ul>\
-                                                <li><a href='#'>ABOUT</a></li>\
-                                                <li><a href='#'>SERVICES</a></li>\
-                                                <li><a href='#'>PORTFOLIO</a></li>\
-                                                <li><a href='#'>AWARDS</a></li>\
-                                                <li><a href='#'>BLOG</a></li>\
-                                                <li><a href='#'>CONTACT</a></li>\
+                                                <li><a href='#' v-for ='menu in menuArr'>{{ menu }}</a></li>\
                                             </ul>\
                                         </nav>\
                                     </div>\
                                 </div>\
                             </div>\
                         </header>\
-                    "
+                    ",
+            data:function(){
+                return{
+                    menuArr : ['ABOUT', 'SERVICES', 'PORTFOLIO', 'AWARDS', 'BLOG', 'CONTACT'],
+                    imgSrc : './img/logo-photography.png',
+                    logo : 'logo',
+                    aHref : 'http://www.google.com'
+                }
+            },
+            methods:{
+                eventFn :function(){
+                    //this.aHref = 'javascript:void(0);';
+                    setTimeout(function(){
+                        //location만 가능 (사이클 문제)
+                        location.aHref = 'http://www.naver.com'
+                    },300)
+                     
+                }
+
+            }
         };
+        var eventBus = new Vue();
 
         // 섹션1
         var section1Component = {
@@ -63,13 +78,20 @@
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>PEOPLE</h2>\
+                                            <h2 @click=' fn1 '>PEOPLE</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+
+            methods:{
+                fn1: function(){
+                    eventBus.$emit('clickfn1','PEOPLE');
+
+                }
+            }
         };
 
         // 섹션2
@@ -80,13 +102,23 @@
                                 <div class='gap'>\
                                     <div class='container'>\
                                         <div class='title'>\
-                                            <h2>NATURE</h2>\
+                                            <h2>{{ busData }}</h2>\
                                         </div>\
                                     </div>\
                                 </div>\
                             </div>\
                         </section>\
-                    "
+                    ",
+            data : function(){
+              return{
+                  busData:'NATURE'
+              }  
+            },
+            created:function(){
+                eventBus.$on('clickfn1', (param) => {
+                    this.busData = param; // 데이터 수정 
+                });
+            },
         };
 
         // 섹션3
@@ -125,9 +157,11 @@
 
         new Vue({
             el:'#brando',
-            data:{
-                title:'Header Logo Title : BRANDO LOGO'
+            data: {
+                title:'Root Title',
             },
+            
+
             components:{
                 'header-component'  : headerComponent,
                 'section1-component': section1Component,

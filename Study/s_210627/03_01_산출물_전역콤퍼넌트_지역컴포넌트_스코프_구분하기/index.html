@@ -15,17 +15,17 @@
     <!-- 상위컴포넌트에서 하위컴포넌트에게로 데이터 통신 : PROPS:[] 사용 -->
 
     <div id="app1"> 
-        <global-component v-bind:propstitle='title1'></global-component>
-        <local-component v-bind:propstitle2='title2'></local-component>
+        <global-component v-bind:propstitle='title'></global-component>
+        <local-component :propstitle2='title2'></local-component>
     </div>
 
     <div id="app2"> 
-        <global-component></global-component>
+        <global-component v-bind:propstitle='title'></global-component>
         <local-component></local-component>
     </div>
 
     <div id="app3"> 
-        <global-component></global-component>
+        <global-component v-bind:propstitle='title'></global-component>
         <local-component></local-component>
     </div>
 
@@ -58,10 +58,8 @@
         new Vue({
             el:'#app1',
             data:{
-                //여기에 변수들을 등록한다. 가장 밑이 우선순위는 동일 
                 title:'재사용 가능한 변수 값 전역(Global) 컴포넌트(Component) 타이틀(Title)!',
-                title1:'test',
-                title2:'지역컴퍼넌트'
+                title2:'루트 아이디 app1 지역컴포넌트의 타이틀!'
             },
             components:{  // 지역컴포넌트의 등록
                 'local-component': localComponent
@@ -71,14 +69,14 @@
         new Vue({
             el:'#app2',
             data:{
-                title:'App2 컴포넌트 타이틀!'
+                title:'App2 전역 컴포넌트 타이틀!'
             }
         });
 
         new Vue({
             el:'#app3',
             data:{
-                title:'App3 컴포넌트 타이틀!'
+                title:'App3 전역 컴포넌트 타이틀!'
             }
         });
 
