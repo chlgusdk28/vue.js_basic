@@ -13,6 +13,7 @@
     
     <div id="brando">
         <!-- 뷰 컴포넌트 가상 요소(태그) -->
+        <!-- <header-component :프롭스속성이름='루트의변수이름'></header-component> -->
         <header-component></header-component>
         <main id="main">
             <section1-component></section1-component>
@@ -22,11 +23,15 @@
         </main>
     </div>
 
+
+
+
     <script>
         // 뷰 전역 컴포넌트 등록 - 자식요소 탬플릿트를 안에 넣어준다.
         // 주의 사항 : 반드시 탬플릿트요소들을 묶어주는 랩핑을 하고 탬플릿트 자식요소를 코딩한다.
         // Vue.component('가상컴포넌트이름',{});
-        Vue.component('header-component',{
+        // var headerComponent = Vue.component('header-component',{
+        var headerComponent = {
             template:"\
                         <header id='header'>\
                             <div class='wrap'>\
@@ -48,10 +53,10 @@
                             </div>\
                         </header>\
                     "
-        });
+        };
 
         // 섹션1
-        Vue.component('section1-component', {
+        var section1Component = {
             template:"\
                         <section id='section1' class='section1234'>\
                             <div class='wrap'>\
@@ -65,10 +70,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        };
 
         // 섹션2
-        Vue.component('section2-component', {
+        var section2Component = {
             template:"\
                         <section id='section2' class='section1234'>\
                             <div class='wrap'>\
@@ -82,10 +87,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        };
 
         // 섹션3
-        Vue.component('section3-component', {
+        var section3Component = {
             template:"\
                         <section id='section3' class='section1234'>\
                             <div class='wrap'>\
@@ -99,10 +104,10 @@
                             </div>\
                         </section>\
                     "
-        });
+        };
 
         // 섹션4
-        Vue.component('section4-component', {
+        var section4Component = {
             template:"\
                         <section id='section4' class='section1234'>\
                             <div class='wrap'>\
@@ -116,19 +121,25 @@
                             </div>\
                         </section>\
                     "
-        });
-
+        };
 
         new Vue({
             el:'#brando',
             data:{
-                title:'Header Title'
+                title:'Header Logo Title : BRANDO LOGO'
+            },
+            components:{
+                'header-component'  : headerComponent,
+                'section1-component': section1Component,
+                'section2-component': section2Component,
+                'section3-component': section3Component,
+                'section4-component': section4Component
             }
         });
+
     </script>
 
     <!-- 뷰 컴포넌트 자식 요소인 탬플릿트의 스타일 -->
-
     <style scoped>
         * {margin:0;padding:0;vertical-align:middle;}
         html,body {width:100%;height:100%;}
@@ -137,6 +148,7 @@
         a {color:#444;text-decoration:none;}
         header, main, section, footer, nav, aside {display:block;}
         .clearfix::after {content:'';display:block;clear:both;}
+
 
         #wrap {width:100%;}
         #wrap #brando {width:100%;}
@@ -159,7 +171,7 @@
         #wrap #brando #main   .section1234 {width:100%;}
         #wrap #brando #main   .section1234 .wrap {width:100%;max-width:1170px;margin:0 auto;}
         #wrap #brando #main   .section1234 .wrap .gap {margin:0 15px;}
-        #wrap #brando #main   .section1234 .wrap .gap .container {width:100%;height:1080px;line-height:1080px;} 
+        #wrap #brando #main   .section1234 .wrap .gap .container {width:100%;height:1080px;line-height:1080px;}
         #wrap #brando #main   .section1234 .wrap .gap .container .title {text-align:center;}
         #wrap #brando #main   .section1234 .wrap .gap .container .title h2 {font-size:200px;color:#fff;}
         
@@ -174,6 +186,8 @@
         #wrap #brando #main   #section4 .wrap .gap .container .title h2  {color:rgba(0, 255, 151, .5);}
 
     </style>
+
+
 
 </div>
 </body>

@@ -22,6 +22,9 @@
         </main>
     </div>
 
+
+
+
     <script>
         // 뷰 전역 컴포넌트 등록 - 자식요소 탬플릿트를 안에 넣어준다.
         // 주의 사항 : 반드시 탬플릿트요소들을 묶어주는 랩핑을 하고 탬플릿트 자식요소를 코딩한다.
@@ -119,16 +122,19 @@
         });
 
 
+
+
+
         new Vue({
             el:'#brando',
             data:{
                 title:'Header Title'
             }
         });
+
     </script>
 
     <!-- 뷰 컴포넌트 자식 요소인 탬플릿트의 스타일 -->
-
     <style scoped>
         * {margin:0;padding:0;vertical-align:middle;}
         html,body {width:100%;height:100%;}
@@ -137,6 +143,7 @@
         a {color:#444;text-decoration:none;}
         header, main, section, footer, nav, aside {display:block;}
         .clearfix::after {content:'';display:block;clear:both;}
+
 
         #wrap {width:100%;}
         #wrap #brando {width:100%;}
@@ -159,7 +166,7 @@
         #wrap #brando #main   .section1234 {width:100%;}
         #wrap #brando #main   .section1234 .wrap {width:100%;max-width:1170px;margin:0 auto;}
         #wrap #brando #main   .section1234 .wrap .gap {margin:0 15px;}
-        #wrap #brando #main   .section1234 .wrap .gap .container {width:100%;height:1080px;line-height:1080px;} 
+        #wrap #brando #main   .section1234 .wrap .gap .container {width:100%;height:1080px;line-height:1080px;}
         #wrap #brando #main   .section1234 .wrap .gap .container .title {text-align:center;}
         #wrap #brando #main   .section1234 .wrap .gap .container .title h2 {font-size:200px;color:#fff;}
         
@@ -174,6 +181,83 @@
         #wrap #brando #main   #section4 .wrap .gap .container .title h2  {color:rgba(0, 255, 151, .5);}
 
     </style>
+
+
+    <hr>
+
+    <div id="app">
+        <h1> 지역 컴포넌트 등록 </h1>
+
+        <header-component></header-component>
+        <div id="main">
+            <section1-component></section1-component>
+            <section2-component></section2-component>
+            <section3-component></section3-component>
+            <section4-component></section4-component>
+        </div>
+        
+    </div>
+
+    <script>
+
+        // 지역 컴포넌트 등록 : 탬플릿트를 변수를 이용 루트의 컴포넌츠에 등록
+        var headerComp = {
+            template:"\
+                    <header id='header'>\
+                        <h1>헤더 컴포넌트</h1>\
+                    </header>\
+                "
+        }
+        var sec1Comp = {
+            template:"\
+                    <section id='section1'>\
+                        <h1>섹션1 컴포넌트</h1>\
+                    </section>\
+                "
+        }
+        var sec2Comp = {
+            template:"\
+                    <section id='section2'>\
+                        <h1>섹션2 컴포넌트</h1>\
+                    </section>\
+                "
+        }
+        var sec3Comp = {
+            template:"\
+                    <section id='section3'>\
+                        <h1>섹션3 컴포넌트</h1>\
+                    </section>\
+                "
+        }
+        var sec4Comp = {
+            template:"\
+                    <section id='section4'>\
+                        <h1>섹션1 컴포넌트</h1>\
+                    </section>\
+                "
+        }
+
+        new Vue({
+            el:'#app',
+            data:{
+                title: '지역컴포넌트'
+            },
+            components:{
+                // '가상요소컴포넌트이름(JSX)': 탬플릿트변수
+                'header-component'  : headerComp,
+                'section1-component': sec1Comp,
+                'section2-component': sec2Comp,
+                'section3-component': sec3Comp,
+                'section4-component': sec4Comp
+            }
+        });
+    </script>
+
+    <style scoped>
+
+
+    </style>
+
 
 </div>
 </body>
