@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 컴포넌트(Component) 전역컴포넌트와 지역컴포넌트 스코프 구분하기</title>
+    <script src="./vue/vue.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <!-- 전역(Global)컴포넌트와 지역(Local)컴포넌트  -->
+    <!-- 상위컴포넌트에서 하위컴포넌트에게로 데이터 통신 : PROPS:[] 사용 -->
+
+    <div id="app1"> 
+        <global-component v-bind:propstitle='title1'></global-component>
+        <local-component v-bind:propstitle2='title2'></local-component>
+    </div>
+
+    <div id="app2"> 
+        <global-component></global-component>
+        <local-component></local-component>
+    </div>
+
+    <div id="app3"> 
+        <global-component></global-component>
+        <local-component></local-component>
+    </div>
+
+
+
+    <script>
+        // 뷰 전역 컴포넌트&탬플릿트 등록 
+        Vue.component('global-component',{
+            props:['propstitle'],
+            template:"\
+                        <div class='title'>\
+                            <h1>{{ propstitle }}</h1>\
+                        </div>\
+                    "
+        });    
+
+
+        // 지역컴포넌트의 탬플릿 변수 등록 
+        var localComponent = {
+            props:['propstitle2'],
+            template:"\
+                        <div class='title'>\
+                            <h1>{{ propstitle2 }}</h1>\
+                        </div>\
+                    "
+        }
+
+
+        // 뷰 인스턴스 생성
+        new Vue({
+            el:'#app1',
+            data:{
+                //여기에 변수들을 등록한다. 가장 밑이 우선순위는 동일 
+                title:'재사용 가능한 변수 값 전역(Global) 컴포넌트(Component) 타이틀(Title)!',
+                title1:'test',
+                title2:'지역컴퍼넌트'
+            },
+            components:{  // 지역컴포넌트의 등록
+                'local-component': localComponent
+            }
+        });
+
+        new Vue({
+            el:'#app2',
+            data:{
+                title:'App2 컴포넌트 타이틀!'
+            }
+        });
+
+        new Vue({
+            el:'#app3',
+            data:{
+                title:'App3 컴포넌트 타이틀!'
+            }
+        });
+
+
+    </script>
+
+    <style>
+        .title {font-size:70px;color:#39c;text-align:center;}
+
+    </style>
+
+</div>
+</body>
+</html>
