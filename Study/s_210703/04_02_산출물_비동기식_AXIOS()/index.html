@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기식 axios() 메서드 외부 데이터 JSON 데이터 처리</title>
+    <script src="./vue/vue.js"></script>
+    <script src="./vue/axios.min.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="app">
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>KOR</th>
+                <th>ENG</th>
+                <th>MAT</th>
+                <th>TOT</th>
+                <th>AVG</th>
+            </tr>
+            <tr v-for='item in a'>
+                <td>{{ item.이름 }}</td>
+                <td>{{ item.kor }}</td>
+                <td>{{ item.eng }}</td>
+                <td>{{ item.mat }}</td>
+                <td>{{ item.mat+item.kor+item.mat }}</td>
+                <td>{{ Math.round((item.mat+item.kor+item.eng)/3) }}</td>
+            </tr>
+        </table>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>TEL</th>
+            </tr>
+            <tr v-for='item in b'>
+                <td>{{ item.이름 }}</td>
+                <td>{{ item.tel }}</td>
+            </tr>
+        </table>
+
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>할일</th>
+            </tr>
+            <tr v-for='item in c'>
+                <td>{{ item.이름 }}</td>
+                <td>{{ item.할일 }}</td>
+            </tr>
+        </table>
+
+
+
+    </div>
+
+    <script>
+
+        new Vue({
+            el:'#app',
+            data:{
+                a:[],
+                b:[],
+                c:[]
+            },
+            created:function(){ 
+                axios.get('./data/sungjuk.json')  //axios는 data 속성 앞에 존재
+                    // .then(function(res){
+                    //     console.log( 'AXIOS RESPONSE : ', res );
+                    // })
+                    .then((res)=>{
+                        // console.log( 'AXIOS RESPONSE ES6 : ', res );
+                        // console.log( res );
+                        // console.log( res.data.성적표[0].이름 );
+                        // console.log( res.data.성적표[1].이름 );
+                        // console.log( res.data.성적표[2].이름 );
+                        // console.log( res.data.성적표[3].이름 );
+                        // console.log( res.data.성적표[4].이름 );
+                        // console.log( res.data.성적표[5].이름 );
+                        // console.log( res.data.연락처 );
+                        // console.log( res.data.일정표 );
+
+                        this.a = res.data.성적표;
+                        this.b = res.data.연락처;
+                        this.c = res.data.일정표;
+                    })
+            }
+        });
+
+    </script>
+
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+
+        #wrap {width:100%;height:100%;}
+        #app {width:100%;height:100%;}
+        #app h1 {text-align:center;font-size:30px;padding:50px 0;}
+
+        table {margin:30px auto;border-collapse:collapse;border:2px solid #000;}
+        table th ,
+        table td {padding:15px 30px;text-align:center;border:1px solid #ccc;}
+        table th {background:#f0f0f0;height:50px;padding:0;border-bottom:1px solid #000;}
+        table tr:hover td {background:#f0f0f0;}
+        table caption {padding:20px 0;font-size:30px;font-weight:600;}
+
+        
+
+    </style>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기식 axios() 메서드 외부 데이터 JSON 데이터 처리</title>
+    <script src="./vue/vue.js"></script>
+    
+</head>
+<body>
+
+
+
+<script>
+
+var xhr = new XMLHttpRequest();
+var url = 'http://apis.data.go.kr/1360000/WthrWrnInfoService/getWthrWrnList'; /*URL*/
+var queryParams = '?' + encodeURIComponent('ServiceKey') + '='+'PWRio4ktONk1JKCzatbYR6VLxZHmWoD%2FQWVe7K4sRdzZ1mkYPdPAcgSd%2B8CGgvYVWvzWTQ%2BX1ojZlwq6c0GyXg%3D%3D'; /*Service Key*/
+queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
+queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
+queryParams += '&' + encodeURIComponent('dataType') + '=' + encodeURIComponent('XML'); /**/
+queryParams += '&' + encodeURIComponent('stnId') + '=' + encodeURIComponent('184'); /**/
+queryParams += '&' + encodeURIComponent('fromTmFc') + '=' + encodeURIComponent('20210601'); /**/
+queryParams += '&' + encodeURIComponent('toTmFc') + '=' + encodeURIComponent('20210701'); /**/
+xhr.open('GET', url + queryParams);
+xhr.onreadystatechange = function () {
+    //if (this.readyState == 4) {
+        alert('Status: '+this.status+'nHeaders: '+JSON.stringify(this.getAllResponseHeaders())+'nBody: '+this.responseText);
+   // }
+};
+
+xhr.send('');
+
+
+</script>
+
+
+</div>
+</body>
+</html>

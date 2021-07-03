@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기식 axios() 활용 폼데이터 전송 서버사이드 스크립트 PHP(JSP,ASP)</title>
+    <script src="./vue/vue.js"></script>
+    <script src="./vue/axios.min.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="app">
+
+         <h1>폼 메일 전송 AXIOS & PHP</h1>   
+
+        <form>
+            <table>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="irum" id="irum" v-model='irum'></td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="email" name="email" id="email" v-model='email'></td>
+                </tr>
+                <tr>
+                    <td>메시지</td>
+                    <td><input type="text" name="message" id="message" v-model='message'></td>
+                </tr>
+            </table>
+            <button v-on:click.prevent='formSubmit'>폼메일 전송</button>    
+        </form>
+
+    </div>
+
+    
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                irum:'',
+                email:'',
+                message:''
+            },
+            methods:{
+                formSubmit: function(){
+                   
+                   //폼데이터 생성자 
+                   fdata = new FormData();
+                   fdata.append('irum', this.irum);
+                   fdata.append('email', this.email);
+                   fdata.append('message', this.message);
+
+                   axios.get('./response.php', fdata)
+                        .then((res)=>{
+                            console.log('PHP응답 ', res );
+                        })
+
+                }
+            }            
+        });
+    </script>
+  
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+
+        #wrap {width:100%;height:100%;}
+        #app {width:100%;height:100%;}
+        #app h1 {text-align:center;font-size:30px;padding:50px 0;}
+
+        table {margin:30px auto;border-collapse:collapse;border:2px solid #000;width:600px;background:#f0f0f0;}
+        table th ,
+        table td {padding:15px 30px;text-align:center;border:1px solid #ccc;}
+        table th {background:#f0f0f0;height:50px;padding:0;border-bottom:1px solid #000;}
+        table tr:hover td {background:#f0f0f0;}
+        table caption {padding:20px 0;font-size:30px;font-weight:600;}
+        
+        table td input[type='text'] ,
+        table td input[type='email'] { width:100%;height:30px;background:#fff; }
+
+        button {width:200px;height:50px;background:#000;color:#fff;font-size:14px;margin:0 auto;display:block;border-radius:5px;cursor:pointer;transition:all .3s;}
+        button:hover {background:#944;}
+        
+
+    </style>
+
+
+</div>
+</body>
+</html>
