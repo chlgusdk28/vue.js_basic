@@ -34,6 +34,13 @@
             <button v-on:click.prevent='formSubmit'>폼메일 전송</button>    
         </form>
 
+        <table>
+            <tr v-for = 'item in a'>
+                <td>{{item}}</td>
+          
+            </tr>
+        </table>
+
     </div>
 
     
@@ -43,10 +50,20 @@
             data:{
                 irum:'',
                 email:'',
-                message:''
+                message:'',
+                a : []
             },
             methods:{
                 formSubmit: function(){
+
+                    //유효성검사
+                    if(this.irum !="" || this.email != "" || this.message != ""){
+                        var fdata = new FormData();
+                        var that = this;
+                    }else{
+                        alert("입력 다해줘야함");
+                        return false; // 전송 취소
+                    }
                    
                    //폼데이터 생성자 
                    fdata = new FormData();
@@ -54,9 +71,14 @@
                    fdata.append('email', this.email);
                    fdata.append('message', this.message);
 
-                   axios.get('./response.php', fdata)
+                   axios.post('./response.php', fdata)
                         .then((res)=>{
-                            console.log('PHP응답 ', res );
+                            console.log('PHP응답 ', res.data );
+                            this.a = res.data.split(',');
+                            //다음입력을 위해 삭제
+                            that.irum = "";
+                            that.email = "";
+                            that.message = "";
                         })
                 }
             }            
