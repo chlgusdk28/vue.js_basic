@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비동기식 fetch() 메서드 외부 데이터 JSON 데이터 처리</title>
+    <script src="./vue/vue.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="app">
+        <h1> {{ subject }}</h1>
+
+        <table>
+            <tr>
+                <th>학번</th>
+                <th>이름</th>
+                <th>kor</th>
+                <th>eng</th>
+                <th>mat</th>
+            </tr>
+            <tr v-for="item in score">
+                <td>
+                    {{item.학번}}
+                </td>
+                <td>
+                    {{item.이름}}
+                </td>
+                <td>
+                    {{item.kor}}
+                </td>
+                <td>
+                    {{item.eng}}
+                </td>
+                <td>
+                    {{item.mat}}
+                </td>
+            </tr>
+           
+        </table>
+
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                subject:'외부 JSON 데이터 비동기식 파일 가져오기',
+                score : [], //성적
+                tel : [], //전화번호
+                todo : [] // 할일
+            },
+            created: function(){
+                // 외부 제이슨 데이터 비동기식으로 전송받음 
+                console.log('created');
+                fetch('./data/sungjuk.json')//fetch는 바로사용 axios는 플러그인 
+                    .then(function(response){
+                        if(response.ok){
+                            return response.json();
+                        }
+                    })
+                    //받는 데이터는 무조건 =>를 써서 받아야한다
+                    .then((data)=>{
+                        console.log( data );
+                        this.score = data.성적표;
+                        this.tel = data.연락처;
+                        this.todo = data.일정표;
+                    })
+            }
+        });
+
+    </script>
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+
+        #wrap {width:100%;height:100%;}
+        #app {width:100%;height:100%;}
+        #app h1 {text-align:center;font-size:30px;}
+
+        table td{border:1px solid #333; padding:5px;}
+        table th{border:1px solid #333; padding:5px;}
+
+    </style>
+
+
+</div>
+</body>
+</html>
