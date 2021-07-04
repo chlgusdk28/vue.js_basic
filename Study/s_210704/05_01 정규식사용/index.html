@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>정규식 활용</title>
+    <script src="./vue/vue.js"></script>
+    <script src="./vue/axios.min.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+    
+    <div id="app">
+
+         <h1>폼 메일 전송 AXIOS & PHP</h1>   
+
+        <form>
+            <table>
+                <tr>
+                    <td>이름</td>
+                    <td><input type="text" name="irum" id="irum" v-model='irum'>
+                        <br>{{irum_result}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>이메일</td>
+                    <td><input type="email" name="email" id="email" v-model='email'>
+                        <br>{{email_result}}
+                    </td>
+                </tr>
+                <tr>
+                    <td>전화번호</td>
+                    <td><input type="text" name="message" id="message" v-model='message'>
+                        <br>{{tel_result}}
+                    </td>
+                </tr>
+            </table>
+            <button v-on:click.prevent='formSubmit'>폼메일 전송</button>    
+        </form>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+            </tr>
+            <tr>
+                <td v-for='item in a'>{{item}}</td>
+            </tr>
+            
+        </table>
+
+
+    </div>
+
+    
+    <script>
+        new Vue({
+            el:'#app',
+            data:{
+                irum:'',
+                email:'',
+                message:'',
+                a:[],
+                irum_result :'한글 2글자 이상으로만 입력 가능합니다. ',
+                email_result :'이메일을 입력해주세요. ',
+                tel_result :'전화번호를 입력해주세요 "-" 포함해서 ',
+                // 정규표현식 변수 설정 
+                irum_Reg : /[가-힣]{2,}/, // 한글 2글자 이상만 허용
+                email_Reg : /^[\w.%+\-]+@+[\w.\-]+\.[A-Za-z]{2,3}$/,
+                //    /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/
+                tel_Reg: /^01[01678]-[0-9]{4}-[0-9]{4}$/
+            },
+            methods:{
+                formSubmit: function(){
+                    
+                   //공백허용안함 유효성 검사
+                   //정규 표현식 유효성 검사
+ 
+                            if( this.irum!='' && this.email !='' && this.message !=''  ){
+                                if (this.irum_Reg.test(this.irum) == false || this.email_Reg.test(this.email) == false || this.tel_Reg.test(this.message) == false){
+                                        alert('입력값이 잘못되었습니다.');
+                                        return false; //전송취소
+                                }
+                                    //폼데이터 생성자 
+                                    var fdata = new FormData();
+                                    var that = this;
+
+                                    fdata.append('irum', this.irum);
+                                    fdata.append('email', this.email);
+                                    fdata.append('tel', this.tel);
+
+                                    axios.post('./response.php', fdata)
+                                    .then((res)=>{
+                                        that.a = res.data.split(';');
+                                        //다음 입력을 위해서 삭제
+                                        that.irum = '';
+                                        that.email = '';
+                                        that.tel = '';
+                                    })
+                                }
+
+                            else{
+                                alert('입력상자에 모두 입력되어야 합니다. 빈값은 허용 안합니다.');
+                                return false; //전송취소
+                            }
+                        
+                } //formSubmit the end
+            }, 
+            watch:{ // 상태감시자 
+                 irum: function(){
+
+                    if (this.irum_Reg.test(this.irum) == true){
+                        this.irum_result= "맞음";
+                    }else{
+                        this.irum_result= "올바른값을 입력해주세요.";
+                    }
+                },
+
+                email: function(){
+                    if (this.email_Reg.test(this.email) == true){
+                        this.email_result= "맞음";
+                    }else{
+                        this.email_result= "이메일을 다시 확인해주세요";
+                    }
+                },
+
+                message: function(){
+                    if (this.tel_Reg.test(this.message) == true){
+                        this.tel_result= "맞음";
+                    }else{
+                        this.tel_result= "전화번호를 다시 확인해주세요";
+                    }
+                }
+        }
+
+            
+        });
+    </script>
+  
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+
+        #wrap {width:100%;height:100%;}
+        #app {width:100%;height:100%;}
+        #app h1 {text-align:center;font-size:30px;padding:50px 0;}
+
+        table {margin:30px auto;border-collapse:collapse;border:2px solid #000;width:600px;background:#f0f0f0;}
+        table th ,
+        table td {padding:15px 30px;text-align:center;border:1px solid #ccc;}
+        table th {background:#f0f0f0;height:50px;padding:0;border-bottom:1px solid #000;}
+        table tr:hover td {background:#f0f0f0;}
+        table caption {padding:20px 0;font-size:30px;font-weight:600;}
+
+        table td input[type='text'] ,
+        table td input[type='email'] { width:100%;height:30px;background:#fff; }
+
+        button {width:200px;height:50px;background:#000;color:#fff;font-size:14px;margin:0 auto;display:block;border-radius:5px;cursor:pointer;transition:all .3s;}
+        button:hover {background:#944;}
+        
+
+    </style>
+
+
+</div>
+</body>
+</html>
