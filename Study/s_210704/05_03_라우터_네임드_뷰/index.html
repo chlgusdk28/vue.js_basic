@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue Router 웹페이지 링크 이동 네임드 뷰</title>
+    <title>Vue Router 웹페이지 링크 이동 네임드 뷰(네임드 라우터뷰)</title>
     <script src="./vue/vue.js"></script>
     <script src="./vue/axios.min.js"></script>
     <script src="./vue/vue-router.js"></script>
@@ -14,13 +14,49 @@
 <div id="wrap">
     
     <div id="app">
-        
+        <!--1 라우터 링크 -->
+        <div id="link">
+            <ul>
+                <li><router-link to='/page1'>PAGE-1</router-link></li>
+                <li><router-link to='/page2'>PAGE-2</router-link></li>
+                <li><router-link to='/page3'>PAGE-3</router-link></li>
+                <li><router-link to='/page4'>PAGE-4</router-link></li>
+            </ul>
+        </div>
     
+        <!--2 라우터 뷰 -->
+        <div id="view">
+            <router-view name='header'></router-view>  <!-- 헤더영역 header -->
+            <router-view></router-view>                <!-- 본문영역 body -->
+            <router-view name='footer'></router-view>  <!-- 푸터영역 foter -->
+        </div>
+
     </div>
 
 
     <script>
-
+        //3. 콤포넌트 변수 : 템플릿트
+        var  headerComponent = {
+            template:"\
+                     <header id='header'>\
+                        <h2>HEADER 영역</h2>\
+                     </header>\
+                     "
+        }
+        var  bodyComponent = {
+            template:"\
+                     <main id='main'>\
+                        <h2>BODY MAIN 영역</h2>\
+                     </main>\
+                     "
+        }
+        var  footerComponent = {
+            template:"\
+                     <footer id='footer'>\
+                        <h2>HEADER 영력</h2>\
+                     </footer>\
+                     "
+        }
 
     </script>
 
