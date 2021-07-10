@@ -18,7 +18,7 @@
         <!--1 라우터 뷰 -->
         <div id="view">
             <router-view></router-view>
-            <router-view name='footerView'></router-view>
+            
             
         </div>
 
@@ -43,8 +43,7 @@
                         </div>\
                         <div class='view-box'>\
                             <router-view></router-view>\
-                        </div>\
-                        <div class='view-box'>\
+                            <router-view name='footerView'></router-view>\
                         </div>\
                      </header>\
 "
@@ -120,21 +119,24 @@
             routes: [
                 {
                    path:'/',
-                   component: headerComponent, //parent
-                            children: [
-                                            { path: '/', component: BodyComponent,
-                                                                    children:[
-                                                                        {path: '/',component: defaultComponent},
-                                                                        {path: '/main1',component: main1Component},
-                                                                        {path: '/main2',component: main2Component},
-                                                                        {path: '/main3',component: main3Component},
-                                                                        {path: '/main4',component: main4Component},
-                                                                    
-                                                                    ]
-                                            }
-                                            
-                            ]
+                   components:{
+                            default: headerComponent, //parent
+                                        children: [// 네임드로 묶어야댐 다시하기 
+                                                        { path: '/', component: BodyComponent,
+                                                                                children:[
+                                                                                    {path: '/',component: defaultComponent},
+                                                                                    {path: '/main1',component: main1Component},
+                                                                                    {path: '/main2',component: main2Component},
+                                                                                    {path: '/main3',component: main3Component},
+                                                                                    {path: '/main4',component: main4Component},
+                                                                                ]
+                                                        }
+                                                        ,{footerView : footerComponent}
+                                                        
+                                        ]
+                                        
                 }
+            }
 
             ]
 
