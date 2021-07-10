@@ -26,38 +26,112 @@
     <script>
         //3. 콤포넌트 변수 : 템플릿트
         var  headerComponent = {
-            template:"\
+             template:"\
                      <header id='header'>\
-                        <h2>HEADER 영역</h2>\
-                        <router-view></router-view>\
+                        <div class='wrap'>\
+                            <div id='link'>\
+                                <ul>\
+                                    <li><router-link to='/default'>default</router-link></li>\
+                                    <li><router-link to='/main1'>MAIN-1</router-link></li>\
+                                    <li><router-link to='/main2'>MAIN-2</router-link></li>\
+                                    <li><router-link to='/main3'>MAIN-3</router-link></li>\
+                                    <li><router-link to='/main4'>MAIN-4</router-link></li>\
+                                </ul>\
+                            </div>\
+                        </div>\
+                        <div class='view-box'>\
+                            <router-view></router-view>\
+                        </div>\
                      </header>\
                      "
         }
-        var  bodyComponent = {
+        var  BodyComponent = {
             template:"\
                      <main id='main'>\
-                        <h2>BODY MAIN 영역</h2>\
+                        <div class='view-box'>\
+                            <router-view></router-view>\
+                        </div>\
                      </main>\
                      "
         }
         var  footerComponent = {
             template:"\
                      <footer id='footer'>\
-                        <h2>HEADER 영역</h2>\
+                        <h2>자식영역의 FOOTER 영역</h2>\
                      </footer>\
                      "
         }
+        var  defaultComponent = {
+             template:"\
+                     <main id='default'>\
+                        <div class='wrap'>\
+                            <h2>default</h2>\
+                        </div>\
+                     </main>\
+                     "
+        }
+
+        var  main1Component = {
+             template:"\
+                     <main id='main1'>\
+                        <div class='wrap'>\
+                            <h2>BODY MAIN MAIN-1 영역</h2>\
+                        </div>\
+                     </main>\
+                     "
+        }
+        var  main2Component = {
+             template:"\
+                     <main id='main2'>\
+                        <div class='wrap'>\
+                            <h2>BODY MAIN MAIN-2 영역</h2>\
+                        </div>\
+                     </main>\
+                     "
+        }
+        var  main3Component = {
+             template:"\
+                     <main id='main3'>\
+                        <div class='wrap'>\
+                            <h2>BODY MAIN MAIN-3 영역</h2>\
+                        </div>\
+                     </main>\
+                     "
+        }
+        var  main4Component = {
+             template:"\
+                     <main id='main4'>\
+                        <div class='wrap'>\
+                            <h2>BODY MAIN MAIN-4 영역</h2>\
+                        </div>\
+                     </main>\
+                     "
+        }       
+
 
 
         //4. 라우터변수 = 생성자 
         var newVueRouter = new VueRouter({
             routes: [
                 {
-                   path:'/header',
+                   path:'/',
                    component: headerComponent, //parent
                    children: [
-                       { path: '/body',   component: bodyComponent },
-                       { path: '/footer', component: footerComponent },
+                       { 
+                           path: '/home',   
+                           component: BodyComponent,
+                           children:[
+                               {path: '/default',component: defaultComponent},
+                               {path: '/main1',component: main1Component},
+                               {path: '/main2',component: main2Component},
+                               {path: '/main3',component: main3Component},
+                               {path: '/main4',component: main4Component}
+                           ]
+                        },
+                        {  
+                            path: '/footer', 
+                            component: footerComponent 
+                        }
                    ]
                 }
             ]
@@ -97,7 +171,11 @@
         /* 라우터 뷰 박스 - 네임드 뷰*/
         #view {width:100%;;margin:0 auto;text-align:center;background:#f0f0f0;height:400px;}
    
+        .menu-box {width:100%;text-align:center;padding:100px 0;}            
+        .menu-box li {display:inline-flex;margin:0 30px;}            
+        .menu-box li a {font-size:16px; color:#39c;}            
 
+        .view-box {width:1170px;margin:0 auto;height:100px;background:#fff;text-align:center;line-height:100px;color:#c77;}    
     </style>
 
 
