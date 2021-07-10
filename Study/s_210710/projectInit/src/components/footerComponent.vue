@@ -18,6 +18,6 @@ export default {
     #footer {width: 100%; height: 280px; background: #333;}
     #footer .wrap {width : 100%; max-width: 1170px; margin:0 auto;}
     #footer .wrap .title{text-align: center;}
-    #footer .wrap .title h1{font-size: 60px; color:#000; line-height: 100px;}
+    #footer .wrap .title h1{font-size: 60px; color:#000; _line-height: 100px;}
 
 </style>
