@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Router 웹페이지 링크 이동 네스티드 뷰(자식요쇼에 라우터뷰)</title>
+    <script src="./vue/vue.js"></script>
+    <script src="./vue/axios.min.js"></script>
+    <script src="./vue/vue-router.js"></script>
+
+</head>
+<body>
+<div id="wrap">
+
+    <div id="app">
+
+        <ul class="menu-box">
+            <li v-for='item in linkArr'>
+               <!-- <router-link v-bind:to='item.tolink'>{{ item.txtlink }}</router-link>  -->
+               <router-link :to='item.tolink'>{{ item.txtlink }}</router-link> 
+            </li>
+        </ul>
+
+        <router-view></router-view>
+
+    </div>
+
+    <script>
+
+        var component1 = {
+            template:"\
+                     <div id='page1' class='page'>\
+                        <h2>PAGE-1 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+        var component2 = {
+            template:"\
+                     <div id='page2' class='page'>\
+                        <h2>PAGE-2 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+        var component3 = {
+            template:"\
+                     <div id='page3' class='page'>\
+                        <h2>PAGE-3 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+        var component4 = {
+            template:"\
+                     <div id='page4' class='page'>\
+                        <h2>PAGE-4 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+        var component5 = {
+            template:"\
+                     <div id='page5' class='page'>\
+                        <h2>PAGE-5 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+        var component6 = {
+            template:"\
+                     <div id='page6' class='page'>\
+                        <h2>PAGE-6 내용 입니다.</h2>\
+                     </div>\
+                     "
+        }
+
+        var router = new VueRouter({
+            routes:[
+                {
+                    path:'/',
+                    component: component1
+                },
+                {
+                    path:'/main1',
+                    component: component1
+                },
+                {
+                    path:'/main2',
+                    component: component2
+                },
+                {
+                    path:'/main3',
+                    component: component3
+                },
+                {
+                    path:'/main4',
+                    component: component4
+                },
+                {
+                    path:'/main5',
+                    component: component5
+                },
+                {
+                    path:'/main6',
+                    component: component6
+                }
+
+            ]
+        });
+
+
+
+        new Vue({
+            el:'#app',
+            router:router, //생성된 라우터 연결
+            data:{
+                linkArr:[
+                    {tolink:'main1', txtlink:'MAIN1-MENU'},
+                    {tolink:'main2', txtlink:'MAIN2-MENU'},
+                    {tolink:'main3', txtlink:'MAIN3-MENU'},
+                    {tolink:'main4', txtlink:'MAIN4-MENU'},
+                    {tolink:'main5', txtlink:'MAIN5-MENU'},
+                    {tolink:'main6', txtlink:'MAIN6-MENU'}
+                ]
+            }
+        });
+
+    </script>
+
+
+    <style>
+        * {margin:0;padding:0;vertical-align:middle;border:0;}
+        html,body {width:100%;height:100%;}
+        body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
+        a {color:#212121;text-decoration:none;transition:color .3s;}
+        a:hover {color:#29c;}
+        a:active {color:#29c;}
+        a:focus {color:#29c;outline:0;}
+    </style>
+
+
+</div>
+</body>
+</html>

@@ -18,6 +18,7 @@
         <!--1 라우터 뷰 -->
         <div id="view">
             <router-view></router-view>
+            
         </div>
 
     </div>
@@ -31,7 +32,7 @@
                         <div class='wrap'>\
                             <div id='link'>\
                                 <ul>\
-                                    <li><router-link to='/default'>default</router-link></li>\
+                                    <li><router-link to='/'>default</router-link></li>\
                                     <li><router-link to='/main1'>MAIN-1</router-link></li>\
                                     <li><router-link to='/main2'>MAIN-2</router-link></li>\
                                     <li><router-link to='/main3'>MAIN-3</router-link></li>\
@@ -42,7 +43,10 @@
                         <div class='view-box'>\
                             <router-view></router-view>\
                         </div>\
+                        <div class='view-box'>\
+                        </div>\
                      </header>\
+                    <router-view name='footerView'></router-view>\
                      "
         }
         var  BodyComponent = {
@@ -112,28 +116,27 @@
 
         //4. 라우터변수 = 생성자 
         var newVueRouter = new VueRouter({
+
             routes: [
                 {
                    path:'/',
                    component: headerComponent, //parent
-                   children: [
-                       { 
-                           path: '/home',   
-                           component: BodyComponent,
-                           children:[
-                               {path: '/default',component: defaultComponent},
-                               {path: '/main1',component: main1Component},
-                               {path: '/main2',component: main2Component},
-                               {path: '/main3',component: main3Component},
-                               {path: '/main4',component: main4Component}
-                           ]
-                        },
-                        {  
-                            path: '/footer', 
-                            component: footerComponent 
-                        }
-                   ]
+                            children: [
+                                            { path: '/', component: BodyComponent,
+                                                                    children:[
+                                                                        {path: '/',component: defaultComponent},
+                                                                        {path: '/main1',component: main1Component},
+                                                                        {path: '/main2',component: main2Component},
+                                                                        {path: '/main3',component: main3Component},
+                                                                        {path: '/main4',component: main4Component},
+                                                                    
+                                                                    ]
+                                            },{path: '/footer', component:footerComponent}
                 }
+                                            
+                            ]
+                }
+
             ]
         });
 
@@ -155,7 +158,7 @@
         html,body {width:100%;height:100%;}
         body {font:normal 14px/1 'arial', '굴림';color:#212121;background:#fff;}
         a {color:#212121;text-decoration:none;}
-
+        #footer{position:fixed; bottom:0; background-color: #212121;}
 
         #wrap {width:100%;height:100%;}
         #app {width:100%;height:100%;}
