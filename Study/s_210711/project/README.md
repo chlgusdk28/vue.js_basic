@@ -1,4 +1,4 @@
-# daily_todo
+# project
 
 ## Project setup
 ```
