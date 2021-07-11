@@ -12,7 +12,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 
 #header {width: 100%; background: #fff; height: 70px; line-height: 70px;}
 #header .wrap{width: 100%;}
@@ -20,3 +20,4 @@ export default {
 #header .wrap h2 a{display: inline-block;}
 #header .wrap h2 a img{width: auto;}
 </style>
+
